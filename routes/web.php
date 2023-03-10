@@ -25,6 +25,9 @@ Route::get('/', function () {
 
 Route::get('/guests', [GuestController::class, 'index']);
 Route::post('/guests', [GuestController::class, 'store']);
+Route::get('/guests/{guest}/edit', [GuestController::class, 'edit']);
+Route::put('/guests/{guest}', [GuestController::class, 'update']);
+Route::delete('/guests/{guest}', [GuestController::class, 'destroy']);
 
 Route::get('/invitations', function () {
     return view('invitations.index', [

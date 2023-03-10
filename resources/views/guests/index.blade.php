@@ -21,6 +21,14 @@
             <td>{{ $guest->firstname }}</td>
             <td>{{ $guest->lastname }}</td>
             <td>{{ $guest->invitation_id }}</td>
+            <td>
+                <form method="POST" action="/guests/{{$guest->id}}">
+                @csrf
+                @method('DELETE')
+                <button>Delete</button>
+                </form>
+                <a href="/guests/{{$guest->id}}/edit">Edit</a>
+            </td>
         </tr>
         @endforeach
     </tbody>

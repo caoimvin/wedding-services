@@ -28,4 +28,28 @@ class GuestController extends Controller
 
         return redirect('/guests')->with('message', 'Guest created');
     }
+
+    public function edit(Guest $guest)
+    {
+        return view('guests.edit', ['guest' => $guest]);
+    }
+
+    public function update(Request $request, Guest $guest)
+    {
+        $formFields = $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'invitation_id' => 'required'
+        ]);
+
+        $guest->update($formFields);
+
+        return redirect('/guests')->with('message', 'Guest updated');
+    }
+
+    public function destroy(Guest $guest)
+    {
+        $guest->delete();
+        return back()->with('message', 'Guest deleted');
+    }
 }
