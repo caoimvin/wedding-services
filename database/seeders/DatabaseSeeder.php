@@ -27,6 +27,16 @@ class DatabaseSeeder extends Seeder
             'password' => 'password'
         ]);
 
+        Invitation::create([
+            'recipient' => 'The Smith Family',
+            'password' => 'password'
+        ]);
+
+        Invitation::create([
+            'recipient' => 'Darth Vader',
+            'password' => 'thedarkside'
+        ]);
+
         Guest::create([
             'firstname' => 'John',
             'lastname' => 'Doe',
@@ -37,6 +47,24 @@ class DatabaseSeeder extends Seeder
             'firstname' => 'Jane',
             'lastname' => 'Doe',
             'invitation_id' => 1
+        ]);
+
+        Guest::create([
+            'firstname' => 'Sam',
+            'lastname' => 'Smith',
+            'invitation_id' => 2
+        ]);
+
+        Guest::create([
+            'firstname' => 'Sally',
+            'lastname' => 'Smith',
+            'invitation_id' => 2
+        ]);
+
+        Guest::create([
+            'firstname' => 'Anakin',
+            'lastname' => 'Skywalker',
+            'invitation_id' => 3
         ]);
     }
 }
