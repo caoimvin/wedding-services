@@ -14,4 +14,11 @@ class Invitation extends Model
     {
         return $this->hasMany(Guest::class);
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['recipient'] ?? false) {
+            $query->where('recipient', 'like', '%'.request('recipient').'%');
+        }
+    }
 }
