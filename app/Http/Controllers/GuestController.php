@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guest;
+use App\Models\Invitation;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
 {
-    public function index(Request $request)
+    public function create(Request $request)
     {
-        return view('guests.index', [
-            'guests' => Guest::latest()->filter(
-                request(['invitation', 'name'])
-            )->paginate(6)
-        ]);
+        $invitationId = $request->query('invitation');
+        $invitation = Invitation::find($invitationId);
+        return view('guests.create', ['invitation_id' => $invitation->id]);
     }
 
     public function store(Request $request)
@@ -26,7 +25,7 @@ class GuestController extends Controller
 
         Guest::create($formFields);
 
-        return redirect('/guests')->with('message', 'Guest created');
+        return redirect('/guestlist')->with('message', 'Guest created');
     }
 
     public function edit(Guest $guest)
@@ -50,6 +49,6 @@ class GuestController extends Controller
     public function destroy(Guest $guest)
     {
         $guest->delete();
-        return back()->with('message', 'Guest deleted');
+        return redirect('/guestlist')->with('message', 'Guest deleted');
     }
 }

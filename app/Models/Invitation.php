@@ -10,6 +10,8 @@ class Invitation extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['recipient', 'password'];
+
     public function guests(): HasMany
     {
         return $this->hasMany(Guest::class);

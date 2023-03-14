@@ -8,14 +8,42 @@ use Illuminate\Http\Request;
 
 class InvitationController extends Controller
 {
-    public function index()
+    public function create()
     {
-        $invitations = Invitation::latest()->filter(
-            request(['recipient'])
-        )->paginate(4);
-        foreach($invitations as $invitation) {
-            $invitation['guests'] = Invitation::find($invitation->id)->guests;
-        }
-        return view('invitations.index', ['invitations' => $invitations]);
+        return view('invitations.create');
+    }
+
+    public function store(Request $request)
+    {
+        $formFields = $request->validate([
+            'recipient' => 'required',
+            'password' => 'required'
+        ]);
+
+        Invitation::create($formFields);
+
+        return redirect('/guestlist')->with('message', 'Invitation created');
+    }
+
+    public function edit(Invitation $invitation)
+    {
+        return view('invitations.edit', ['invitation' => $invitation]);
+    }
+
+    public function update(Request $request, Invitation $invitation)
+    {
+        $formFields = $request->validate([
+            'recipient' => 'required'
+        ]);
+
+        $invitation->update($formFields);
+
+        return redirect('/guestlist')->with('message', 'Invitation updated');
+    }
+
+    public function destroy(Invitation $invitation)
+    {
+        $invitation->delete();
+        return redirect('/guestlist')->with('message', 'Invitation deleted');
     }
 }

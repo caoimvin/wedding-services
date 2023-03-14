@@ -3,7 +3,7 @@
 @section('content')
 <h1>Edit Guest {{ $guest->id }}</h1>
 
-<form method="POST" action="/guests/{{$guest->id}}" enctype="multipart/form-data">
+<form method="POST" action="/guest/{{$guest->id}}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <input type="text" name="firstname" placeholder="firstname" value="{{$guest->firstname}}">
@@ -19,6 +19,12 @@
         <p style="color: red;">{{ $message }}</p>
     @enderror
     <button type="submit">Submit</button>
+</form>
+
+<form method="POST" action="/guest/{{ $guest->id }}">
+    @csrf
+    @method('DELETE')
+    <button type="submit">Remove Guest</button>
 </form>
 
 @endsection

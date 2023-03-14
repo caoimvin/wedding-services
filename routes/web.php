@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\GuestlistController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\UserController;
 use App\Models\Guest;
@@ -26,15 +27,25 @@ Route::get('/', function () {
 })->middleware('auth');
 
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
-Route::post('/users', [UserController::class, 'store'])->middleware('auth');
+Route::post('/users', [UserController::class, 'store']);
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/users/auth', [UserController::class, 'auth']);
 
-Route::get('/guests', [GuestController::class, 'index'])->middleware('auth');
-Route::post('/guests', [GuestController::class, 'store']);
-Route::get('/guests/{guest}/edit', [GuestController::class, 'edit']);
-Route::put('/guests/{guest}', [GuestController::class, 'update']);
-Route::delete('/guests/{guest}', [GuestController::class, 'destroy']);
+Route::get('/guestlist', [GuestlistController::class, 'index'])->middleware('auth');
 
-Route::get('/invitations', [InvitationController::class, 'index'])->middleware('auth');
+Route::prefix('guest')->group(function () {
+    Route::get('/', [GuestController::class, 'create'])->middleware('auth');
+    Route::post('/', [GuestController::class, 'store']);
+    Route::get('/{guest}', [GuestController::class, 'edit']);
+    Route::put('/{guest}', [GuestController::class, 'update']);
+    Route::delete('/{guest}', [GuestController::class, 'destroy']);
+});
+
+Route::prefix('invitation')->group(function () {
+    Route::get('/', [InvitationController::class, 'create']);
+    Route::post('/', [InvitationController::class, 'store']);
+    Route::get('/{invitation}', [InvitationController::class, 'edit'])->middleware('auth');
+    Route::put('/{invitation}', [InvitationController::class, 'update'])->middleware('auth');
+    Route::delete('/{invitation}', [InvitationController::class, 'destroy'])->middleware('auth');
+});

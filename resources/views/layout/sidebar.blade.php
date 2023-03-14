@@ -1,6 +1,6 @@
 <nav class="sidebar">
-    <a href="/guests">Guests</a>
-    <a href="/invitations">Invitations</a>
+    <a href="/">Dashboard</a>
+    <a href="/guestlist">Guest List</a>
     
     @auth
         <span style="color: white;">
