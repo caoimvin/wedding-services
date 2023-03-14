@@ -10,7 +10,7 @@ class Invitation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['recipient', 'password'];
+    protected $fillable = ['recipient', 'access_code'];
 
     public function guests(): HasMany
     {

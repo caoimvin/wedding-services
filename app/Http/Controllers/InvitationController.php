@@ -17,7 +17,7 @@ class InvitationController extends Controller
     {
         $formFields = $request->validate([
             'recipient' => 'required',
-            'password' => 'required'
+            'access_code' => ['required', 'unique:invitations']
         ]);
 
         Invitation::create($formFields);
