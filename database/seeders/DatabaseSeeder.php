@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Guest;
 use App\Models\Invitation;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -65,6 +66,13 @@ class DatabaseSeeder extends Seeder
             'firstname' => 'Anakin',
             'lastname' => 'Skywalker',
             'invitation_id' => 3
+        ]);
+
+        // default admin user
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@mail.com',
+            'password' => bcrypt('admin')
         ]);
     }
 }
