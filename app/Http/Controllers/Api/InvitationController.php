@@ -8,13 +8,10 @@ use Illuminate\Http\Request;
 
 class InvitationController extends Controller
 {
-    public function getData(Request $request)
+    public function index(Request $request)
     {
-        $request->validate([
-            'access_code' => 'required'
-        ]);
-        $invitation = Invitation::where('access_code', '=', $request['access_code'])->first();
+        $invitation = $request->user();
         $invitation['guests'] = Invitation::find($invitation->id)->guests;
-        return $invitation;
+        return response($invitation, 200);
     }
 }
