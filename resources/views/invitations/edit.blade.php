@@ -9,6 +9,7 @@
         @csrf
         @method('PUT')
         <input type="text" name="recipient" value="{{ $invitation->recipient }}">
+        <input type="text" name="access_name" value="{{ $invitation->access_name }}">
         <button type="submit">Submit</button>
     </form>
 </div>

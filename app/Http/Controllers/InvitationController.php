@@ -17,8 +17,11 @@ class InvitationController extends Controller
     {
         $formFields = $request->validate([
             'recipient' => 'required',
-            'access_code' => ['required', 'unique:invitations']
+            'access_name' => ['required', 'unique:invitations'],
+            'access_code' => ['required']
         ]);
+
+        $formFields['access_code'] = bcrypt('access_code');
 
         Invitation::create($formFields);
 

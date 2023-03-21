@@ -25,17 +25,20 @@ class DatabaseSeeder extends Seeder
 
         Invitation::create([
             'recipient' => 'The Doe Family',
-            'access_code' => 'code1'
+            'access_name' => 'the-doe-family',
+            'access_code' => bcrypt('code1')
         ]);
 
         Invitation::create([
             'recipient' => 'The Smith Family',
-            'access_code' => 'code2'
+            'access_name' => 'the-smith-family',
+            'access_code' => bcrypt('code2')
         ]);
 
         Invitation::create([
             'recipient' => 'Darth Vader',
-            'access_code' => 'thedarkside'
+            'access_name' => 'darth-vader',
+            'access_code' => bcrypt('thedarkside')
         ]);
 
         Guest::create([

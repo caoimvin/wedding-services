@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
             $table->string('recipient');
+            $table->string('access_name')->unique();
             $table->string('access_code');
             $table->timestamps();
         });
